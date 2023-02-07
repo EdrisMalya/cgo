@@ -847,6 +847,123 @@ class AuditFormSeenHistoriesTableSeeder extends Seeder
                 'created_at' => '2023-02-06 09:10:26',
                 'updated_at' => '2023-02-06 09:10:26',
             ),
+            92 => 
+            array (
+                'id' => 93,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 09:09:57',
+                'updated_at' => '2023-02-07 09:09:57',
+            ),
+            93 => 
+            array (
+                'id' => 94,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 09:10:02',
+                'updated_at' => '2023-02-07 09:10:02',
+            ),
+            94 => 
+            array (
+                'id' => 95,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:25:10',
+                'updated_at' => '2023-02-07 11:25:10',
+            ),
+            95 => 
+            array (
+                'id' => 96,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:25:38',
+                'updated_at' => '2023-02-07 11:25:38',
+            ),
+            96 => 
+            array (
+                'id' => 97,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:55:36',
+                'updated_at' => '2023-02-07 11:55:36',
+            ),
+            97 => 
+            array (
+                'id' => 98,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:57:51',
+                'updated_at' => '2023-02-07 11:57:51',
+            ),
+            98 => 
+            array (
+                'id' => 99,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:58:44',
+                'updated_at' => '2023-02-07 11:58:44',
+            ),
+            99 => 
+            array (
+                'id' => 100,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:59:13',
+                'updated_at' => '2023-02-07 11:59:13',
+            ),
+            100 => 
+            array (
+                'id' => 101,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:59:26',
+                'updated_at' => '2023-02-07 11:59:26',
+            ),
+            101 => 
+            array (
+                'id' => 102,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:59:33',
+                'updated_at' => '2023-02-07 11:59:33',
+            ),
+            102 => 
+            array (
+                'id' => 103,
+                'type' => 'na',
+                'audit_form_id' => 10,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 11:59:52',
+                'updated_at' => '2023-02-07 11:59:52',
+            ),
+            103 => 
+            array (
+                'id' => 104,
+                'type' => 'na',
+                'audit_form_id' => 9,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 12:00:27',
+                'updated_at' => '2023-02-07 12:00:27',
+            ),
+            104 => 
+            array (
+                'id' => 105,
+                'type' => 'na',
+                'audit_form_id' => 9,
+                'user_id' => 3,
+                'created_at' => '2023-02-07 12:00:35',
+                'updated_at' => '2023-02-07 12:00:35',
+            ),
         ));
         
         

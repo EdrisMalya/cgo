@@ -539,6 +539,71 @@ class AuditFilesTableSeeder extends Seeder
                 'created_at' => '2023-02-06 09:08:30',
                 'updated_at' => '2023-02-06 09:08:30',
             ),
+            40 => 
+            array (
+                'id' => 43,
+                'audit_form_id' => 10,
+                'file' => 'audit_form_files/L0Qx3NFAIgb5FcoUBa19MStN2fY1Ce8CZJ07atb9.png',
+                'file_type' => 'na',
+                'file_name' => '637881058818827653.jpg',
+                'file_size' => '10262',
+                'file_ext' => 'jpg',
+                'uploaded_by' => 3,
+                'created_at' => '2023-02-07 11:45:51',
+                'updated_at' => '2023-02-07 11:45:51',
+            ),
+            41 => 
+            array (
+                'id' => 44,
+                'audit_form_id' => 10,
+                'file' => 'audit_form_files/OVlbFpre0DhARWyDDJqIWtoShOoBqEbj4SmPy4gG.pdf',
+                'file_type' => 'na',
+                'file_name' => 'Cover Letter.pdf',
+                'file_size' => '110784',
+                'file_ext' => 'pdf',
+                'uploaded_by' => 3,
+                'created_at' => '2023-02-07 11:45:51',
+                'updated_at' => '2023-02-07 11:45:51',
+            ),
+            42 => 
+            array (
+                'id' => 45,
+                'audit_form_id' => 10,
+                'file' => 'audit_form_files/0eOP6ddhprHR4W4WDMQSirVl9ctin3iIN1lYUmwd.pptx',
+                'file_type' => 'na',
+                'file_name' => 'Cover Letter.pptx',
+                'file_size' => '31706',
+                'file_ext' => 'pptx',
+                'uploaded_by' => 3,
+                'created_at' => '2023-02-07 11:45:51',
+                'updated_at' => '2023-02-07 11:45:51',
+            ),
+            43 => 
+            array (
+                'id' => 46,
+                'audit_form_id' => 10,
+                'file' => 'audit_form_files/8cfsHO4MkyOxkENYP6soDW3KO8wd9d8Xlpdf3tX3.pdf',
+                'file_type' => 'na',
+            'file_name' => 'Edris Malya (CV).pdf',
+                'file_size' => '674065',
+                'file_ext' => 'pdf',
+                'uploaded_by' => 3,
+                'created_at' => '2023-02-07 11:45:51',
+                'updated_at' => '2023-02-07 11:45:51',
+            ),
+            44 => 
+            array (
+                'id' => 47,
+                'audit_form_id' => 10,
+                'file' => 'audit_form_files/SDVzXUI0ZVUcMsGDqZ4x7vowcTAgQYBz8fFUUP1W.png',
+                'file_type' => 'na',
+                'file_name' => '637881058818827653.jpg',
+                'file_size' => '10262',
+                'file_ext' => 'jpg',
+                'uploaded_by' => 3,
+                'created_at' => '2023-02-07 11:47:14',
+                'updated_at' => '2023-02-07 11:47:14',
+            ),
         ));
         
         
