@@ -1,6 +1,10 @@
 import React from 'react'
 import SidebarLinkButton from '@/Components/SidebarLinkButton'
-import { CogIcon, UsersIcon } from '@heroicons/react/24/outline'
+import {
+    CogIcon,
+    DocumentMagnifyingGlassIcon,
+    UsersIcon,
+} from '@heroicons/react/24/outline'
 import { HomeIcon } from '@heroicons/react/24/solid'
 import ProtectedComponent from '@/Components/ProtectedComponent'
 import { usePage } from '@inertiajs/inertia-react'
@@ -25,6 +29,15 @@ const SidebarLinks = ({ active }) => {
                     url={route('user-management.index', { lang })}
                     label={translate('User management')}
                     active={active === 'user_management'}
+                />
+            </ProtectedComponent>
+            <ProtectedComponent role={'normal-audit-access'}>
+                <SidebarLinkButton
+                    dir={dir}
+                    icon={<DocumentMagnifyingGlassIcon className={'h-5'} />}
+                    url={route('normal-audit.index', { lang })}
+                    label={translate('Normal audit')}
+                    active={active === 'normal_audit'}
                 />
             </ProtectedComponent>
             <ProtectedComponent role={'configuration-access'}>

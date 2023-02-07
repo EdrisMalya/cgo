@@ -29,3 +29,12 @@ function translate($word, $variables = []) {
             }
     }
 }
+
+function checkIfEncrypted($value){
+    try {
+        return decrypt($value);
+    }
+    catch (Exception $exception){
+        return $value;
+    }
+}

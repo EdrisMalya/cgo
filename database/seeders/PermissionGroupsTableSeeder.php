@@ -99,6 +99,62 @@ class PermissionGroupsTableSeeder extends Seeder
                 'created_at' => '2022-12-22 10:29:02',
                 'updated_at' => '2022-12-22 10:29:02',
             ),
+            10 => 
+            array (
+                'id' => 14,
+                'permission_group_id' => 0,
+                'name' => 'Normal audit',
+                'created_at' => '2023-01-22 14:32:02',
+                'updated_at' => '2023-01-22 14:32:02',
+            ),
+            11 => 
+            array (
+                'id' => 15,
+                'permission_group_id' => 4,
+                'name' => 'Auditor team',
+                'created_at' => '2023-01-23 11:14:26',
+                'updated_at' => '2023-01-23 11:14:26',
+            ),
+            12 => 
+            array (
+                'id' => 16,
+                'permission_group_id' => 4,
+                'name' => 'Auditor members',
+                'created_at' => '2023-01-23 11:38:34',
+                'updated_at' => '2023-01-23 11:38:34',
+            ),
+            13 => 
+            array (
+                'id' => 17,
+                'permission_group_id' => 4,
+                'name' => 'Confidentiality level',
+                'created_at' => '2023-01-23 11:42:30',
+                'updated_at' => '2023-01-23 11:42:30',
+            ),
+            14 => 
+            array (
+                'id' => 18,
+                'permission_group_id' => 4,
+                'name' => 'Application settings',
+                'created_at' => '2023-01-23 11:54:06',
+                'updated_at' => '2023-01-23 11:54:06',
+            ),
+            15 => 
+            array (
+                'id' => 19,
+                'permission_group_id' => 18,
+                'name' => 'Allowed extensions',
+                'created_at' => '2023-01-23 11:56:10',
+                'updated_at' => '2023-01-23 11:56:10',
+            ),
+            16 => 
+            array (
+                'id' => 20,
+                'permission_group_id' => 14,
+                'name' => 'Edit report',
+                'created_at' => '2023-02-02 12:22:06',
+                'updated_at' => '2023-02-02 12:22:13',
+            ),
         ));
         
         

@@ -31,6 +31,8 @@ const Select2 = ({
     selectedImage = '',
     selectAllOption = false,
     data,
+    variant = 'normal',
+    disableIgnoreIds = false,
 }) => {
     const resolve = (path, obj) => {
         return path.split('.').reduce(function (prev, curr) {
@@ -51,10 +53,14 @@ const Select2 = ({
     const populateOptions = () => {
         if (data) {
             let ignoreOptions = []
-            if (isMulti && selectedValue) {
-                ignoreOptions = selectedValue?.map(item => parseInt(item.value))
-            } else {
-                ignoreOptions = [selectedValue?.value]
+            if (!disableIgnoreIds) {
+                if (isMulti && selectedValue) {
+                    ignoreOptions = selectedValue?.map(item =>
+                        parseInt(item.value),
+                    )
+                } else {
+                    ignoreOptions = [selectedValue?.value]
+                }
             }
             let optionArray = data?.map(item => {
                 return {
@@ -179,12 +185,12 @@ const Select2 = ({
                                 <Chip
                                     size={size}
                                     key={index}
+                                    variant={variant}
                                     avatar={
                                         selectedImage !== '' ? (
                                             <Avatar
                                                 src={
-                                                    process.env
-                                                        .NEXT_PUBLIC_BACKEND_URL2 +
+                                                    route().t.url +
                                                     '/storage/' +
                                                     option?.image
                                                 }

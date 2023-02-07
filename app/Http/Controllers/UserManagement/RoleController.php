@@ -92,6 +92,10 @@ class RoleController extends Controller
         if($role->permissions->count() > 0){
             return back()->with(['message'=>translate('Cannot be deleted because '.$role->count().' permission is attached to this role'), 'type'=>'error']);
         }else{
+            $check_role_assigned = UserRole::query()->where('role_id', '=', $role->id);
+            if($check_role_assigned->exists()){
+                return back()->with(['message' => translate('Role cannot be deleted because it has been attached with ('.$check_role_assigned->count().') users'), 'type' => 'error']);
+            }
             $role->delete();
             return back()->with(['message'=>translate('Deleted successfully'), 'type'=>'success']);
         }

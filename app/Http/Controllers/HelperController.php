@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Language;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use TPDF;
 
 class HelperController extends Controller
@@ -129,4 +130,10 @@ class HelperController extends Controller
         TPDF::Output($data['title'].'.pdf', 'I');
         return response()->noContent();
     }
+    public static function removeFile($file){
+        if(File::exists(public_path('storage/'.$file))){
+            File::delete(public_path('storage/'.$file));
+        }
+    }
+
 }

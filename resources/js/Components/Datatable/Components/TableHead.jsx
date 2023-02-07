@@ -12,7 +12,7 @@ const TableHead = ({
     lang,
     datatableRoute,
     translate,
-   shouldIShowTheColumn
+    shouldIShowTheColumn,
 }) => {
     const sortIndicator = column => {
         if (column?.key === data.sort_by) {
@@ -79,22 +79,23 @@ const TableHead = ({
                         </div>
                     </th>
                 )}
-                {(columns ?? [])?.map((column, index) => (
-                    shouldIShowTheColumn(column.key)&&(
-                        <th
-                            scope="col"
-                            key={index}
-                            onClick={() => handSortClick(column)}
-                            className={`py-3 px-6 font-bold ${
-                                column?.sort && 'cursor-pointer'
-                            }`}>
-                            <div className="flex items-center">
-                                {translate(column?.name)}
-                                {column?.sort && sortIndicator(column)}
-                            </div>
-                        </th>
-                    )
-                ))}
+                {(columns ?? [])?.map(
+                    (column, index) =>
+                        shouldIShowTheColumn(column.key) && (
+                            <th
+                                scope="col"
+                                key={index}
+                                onClick={() => handSortClick(column)}
+                                className={`py-3 px-6 font-bold !whitespace-nowrap ${
+                                    column?.sort && 'cursor-pointer'
+                                }`}>
+                                <div className="flex items-center">
+                                    {translate(column?.name)}
+                                    {column?.sort && sortIndicator(column)}
+                                </div>
+                            </th>
+                        ),
+                )}
                 {actions && shouldIShowTheColumn('actions') && (
                     <th scope="col" className="py-3 px-6 font-bold">
                         <div className="flex items-center">

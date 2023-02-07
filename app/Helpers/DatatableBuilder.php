@@ -19,12 +19,14 @@ class DatatableBuilder
         $order_by = 'id';
         $order_direction = 'desc';
         if($this->request->has('search')){
-            $this->query = $this->query->where(function($whereCondition) use($search_columns) {
-                $whereCondition->where($search_columns[0], 'LIKE', '%'.$this->request->get('search').'%');
-                foreach (array_slice($search_columns, 1) as $column){
-                    $whereCondition->orWhere($column, 'LIKE', '%'.$this->request->get('search').'%');
-                }
-            });
+            if(count($search_columns) > 0){
+                $this->query = $this->query->where(function($whereCondition) use($search_columns) {
+                    $whereCondition->where($search_columns[0], 'LIKE', '%'.$this->request->get('search').'%');
+                    foreach (array_slice($search_columns, 1) as $column){
+                        $whereCondition->orWhere($column, 'LIKE', '%'.$this->request->get('search').'%');
+                    }
+                });
+            }
         }
         if($this->request->has('limit')){
             $limit = $this->request->get('limit');

@@ -196,7 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Elibyy\TCPDF\ServiceProvider::class,
-
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
     ],
 
     /*

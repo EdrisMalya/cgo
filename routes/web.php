@@ -35,7 +35,6 @@ Route::group(['prefix'=>'{lang}'], function(){
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         /*************************************** User management routes ****************************************/
-
         Route::group(['prefix' => 'user/management'], function (){
             Route::get('/', function(){
                 User::isAllowed('user-management-access');
@@ -56,6 +55,7 @@ Route::group(['prefix'=>'{lang}'], function(){
 
             /******************************************* Log activities ************************************/
             Route::get('log/activities', [\App\Http\Controllers\UserManagement\LogActivityController::class, 'index'])->name('log.activities.index');
+            Route::post('log/activity/restore/{type}', [\App\Http\Controllers\UserManagement\LogActivityController::class, 'restore'])->name('log.activities.restore');
             Route::delete('delete/log/activity/{activity}', [\App\Http\Controllers\UserManagement\LogActivityController::class, 'deleteLogActivity'])->name('destroy.activity');
 
 
@@ -73,7 +73,6 @@ Route::group(['prefix'=>'{lang}'], function(){
         });
 
         /**************************************** Configuration routes ***********************************************/
-
         Route::group(['prefix'=>'configuration'], function(){
             Route::get('/', function(){
                 User::isAllowed('configuration-access');
@@ -87,7 +86,33 @@ Route::group(['prefix'=>'{lang}'], function(){
 
             /**************************************** backup routes ********************************************/
             Route::get('backup', [\App\Http\Controllers\Configurations\BackupController::class, 'index'])->name('backup.index');
+
+            /**************************************** Auditor team routes *******************************************/
+            Route::resource('auditor-team', \App\Http\Controllers\Configurations\AuditorTeamController::class);
+
+            /************************************** Auditor team members routes ********************************/
+            Route::resource('auditor-members', \App\Http\Controllers\Configurations\AuditorMemberController::class);
+
+            /************************************ Confidentiality level routes **********************************/
+            Route::resource('confidentiality-level', \App\Http\Controllers\Configurations\ConfidentialityLevelController::class);
+
+            /************************************ Application settings **********************************/
+            Route::prefix('application/settings')->group(function(){
+                Route::get('/', function (){
+                    User::isAllowed('application-settings-access');
+                    return Inertia::render('Configuration/ApplicationSettings/ApplicationSettingsIndex', [
+                        'active' => 'application-settings',
+                        'users' => Inertia::lazy(fn () => User::all())
+                    ]);
+                })->name('application.settings.index');
+                Route::resource('allowed-extensions', \App\Http\Controllers\Configurations\ApplicationSettings\AllowedExtentionsController::class);
+            });
         });
+
+        /******************************************* Normal Audit routes ********************************************/
+        Route::resource('normal-audit', \App\Http\Controllers\NormalAudit\NormalAuditController::class);
+        Route::post('process/normal/audit/{normal_audit_id}/{type}', [\App\Http\Controllers\NormalAudit\NormalAuditController::class ,'processNormalAudit'])->name('normal-audit.process');
+        Route::get('audit/file/download/{id}/{type}', [\App\Http\Controllers\AuditFileController::class, 'download'])->name('audit.file.download');
     });
 
 });

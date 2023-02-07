@@ -12,6 +12,11 @@ import LogUpdateEvent from '@/Pages/UserManagement/Users/Components/LogUpdateEve
 import LogCreatedEvent from '@/Pages/UserManagement/Users/Components/LogCreatedEvent'
 import { useRecoilState } from 'recoil'
 import { directionAtom } from '@/atoms/directionAtom'
+import swal from 'sweetalert'
+import { LoadingButton } from '@mui/lab'
+import RestoreIcon from '@mui/icons-material/Restore'
+import { useForm, usePage } from '@inertiajs/inertia-react'
+import ProtectedComponent from '@/Components/ProtectedComponent'
 
 const ActivityDetails = ({ onClose, translate, data }) => {
     const [open, setOpen] = useState(true)
@@ -19,6 +24,49 @@ const ActivityDetails = ({ onClose, translate, data }) => {
     const handleClose = () => {
         setOpen(false)
         onClose()
+    }
+
+    const { lang } = usePage().props
+
+    const { processing, post, setData } = useForm({
+        activity: data,
+    })
+
+    const restore = () => {
+        swal({
+            icon: 'info',
+            title: translate('Are you sure'),
+            buttons: true,
+        }).then(res => {
+            if (res) {
+                post(
+                    route('log.activities.restore', { type: 'deleted', lang }),
+                    {
+                        onSuccess: () => {
+                            handleClose()
+                        },
+                    },
+                )
+            }
+        })
+    }
+
+    const actionFinder = () => {
+        switch (data?.event) {
+            case 'deleted':
+                return (
+                    <ProtectedComponent role={'log-activity-restore-data'}>
+                        <LoadingButton
+                            loading={processing}
+                            onClick={restore}
+                            size={'small'}
+                            variant={'outlined'}
+                            endIcon={<RestoreIcon />}>
+                            {translate('Restore')}
+                        </LoadingButton>
+                    </ProtectedComponent>
+                )
+        }
     }
 
     const [dir] = useRecoilState(directionAtom)
@@ -49,7 +97,18 @@ const ActivityDetails = ({ onClose, translate, data }) => {
                                                 )}
                                             </td>
                                             <td>
-                                                {data?.properties?.old[item]}
+                                                {item === 'created_at' ||
+                                                item === 'updated_at'
+                                                    ? dayjs(
+                                                          data?.properties?.old[
+                                                              item
+                                                          ],
+                                                      ).format(
+                                                          'YYYY-MM-DD hh:mm A',
+                                                      )
+                                                    : data?.properties?.old[
+                                                          item
+                                                      ]}
                                             </td>
                                         </tr>
                                     ),
@@ -89,9 +148,14 @@ const ActivityDetails = ({ onClose, translate, data }) => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button color={'error'} onClick={handleClose}>
+                <Button
+                    size={'small'}
+                    variant={'outlined'}
+                    color={'error'}
+                    onClick={handleClose}>
                     {translate('Close')}
                 </Button>
+                {actionFinder()}
             </DialogActions>
         </Dialog>
     )

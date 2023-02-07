@@ -31,6 +31,7 @@ const Datatable = ({
     objectName = null,
     deleteRoute,
     datatableFilters = [],
+    fromResource = false,
 }) => {
     const [data, dispatch] = useReducer(DatatableReducer, DATA_TABLE_INIT_VALUE)
     const [totalPage, setTotalPage] = useState(0)
@@ -72,13 +73,23 @@ const Datatable = ({
 
     useEffect(() => {
         if (tableData) {
-            let p_number = tableData.total / tableData.per_page
-            setTotalPage(
-                tableData.total / tableData.per_page >
-                    parseInt(tableData.total / tableData.per_page)
-                    ? parseInt(p_number) + 1
-                    : parseInt(p_number),
-            )
+            if (fromResource) {
+                let p_number = tableData.meta.total / tableData.meta.per_page
+                setTotalPage(
+                    tableData.meta.total / tableData.meta.per_page >
+                        parseInt(tableData.meta.total / tableData.meta.per_page)
+                        ? parseInt(p_number) + 1
+                        : parseInt(p_number),
+                )
+            } else {
+                let p_number = tableData.total / tableData.per_page
+                setTotalPage(
+                    tableData.total / tableData.per_page >
+                        parseInt(tableData.total / tableData.per_page)
+                        ? parseInt(p_number) + 1
+                        : parseInt(p_number),
+                )
+            }
         }
     }, [tableData])
 
@@ -170,7 +181,17 @@ const Datatable = ({
                         />
                     </div>
                     <div>
-                        {tableData?.from} - {tableData.to} of {tableData?.total}
+                        {fromResource ? (
+                            <div>
+                                {tableData?.meta?.from} - {tableData.meta.to} of{' '}
+                                {tableData?.meta.total}
+                            </div>
+                        ) : (
+                            <div>
+                                {tableData?.from} - {tableData.to} of{' '}
+                                {tableData?.total}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

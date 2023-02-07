@@ -6,13 +6,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import dayjs from 'dayjs'
 
-export default function BasicDatePicker({
+export default function Datepicker({
     value,
     onChange,
     label = null,
     format = 'YYYY/MM/DD',
     size = 'small',
     returnFormat = null,
+    error = '',
 }) {
     const [dateValue, setDateValue] = React.useState(value)
 
@@ -31,7 +32,13 @@ export default function BasicDatePicker({
                         ),
                     )
                 }}
-                renderInput={params => <TextField size={size} {...params} />}
+                renderInput={params => (
+                    <TextField
+                        helperText={<p className={'text-red-500'}>{error}</p>}
+                        size={size}
+                        {...params}
+                    />
+                )}
             />
         </LocalizationProvider>
     )

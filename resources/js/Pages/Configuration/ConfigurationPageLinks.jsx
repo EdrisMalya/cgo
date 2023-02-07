@@ -4,6 +4,9 @@ import { Link } from '@inertiajs/inertia-react'
 import { Button } from '@mui/material'
 import { LanguageIcon } from '@heroicons/react/24/outline'
 import useLanguage from '@/hooks/useLanguage'
+import GroupsIcon from '@mui/icons-material/Groups'
+import LockIcon from '@mui/icons-material/Lock'
+import TuneIcon from '@mui/icons-material/Tune'
 
 const ConfigurationPageLinks = ({ active, lang }) => {
     const { translate } = useLanguage()
@@ -13,6 +16,14 @@ const ConfigurationPageLinks = ({ active, lang }) => {
                 return 'language'
             case 'backup':
                 return 'backup'
+            case 'auditor-team':
+                return 'auditor-team'
+            case 'auditor-members':
+                return 'auditor-members'
+            case 'confidentiality-level':
+                return 'confidentiality-level'
+            case 'application-settings':
+                return 'application-settings'
         }
     }
     return (
@@ -20,6 +31,8 @@ const ConfigurationPageLinks = ({ active, lang }) => {
             <ProtectedComponent role={'language-access'}>
                 <Link href={route('language.index', { lang })}>
                     <Button
+                        size={'small'}
+                        className={'whitespace-nowrap'}
                         startIcon={<LanguageIcon className={'h-4'} />}
                         variant={
                             activeLink() === 'language'
@@ -30,9 +43,71 @@ const ConfigurationPageLinks = ({ active, lang }) => {
                     </Button>
                 </Link>
             </ProtectedComponent>
+            <ProtectedComponent role={'auditor-team-access'}>
+                <Link href={route('auditor-team.index', { lang })}>
+                    <Button
+                        size={'small'}
+                        className={'whitespace-nowrap'}
+                        startIcon={<GroupsIcon />}
+                        variant={
+                            activeLink() === 'auditor-team'
+                                ? 'contained'
+                                : 'outlined'
+                        }>
+                        {translate('Auditor Team')}
+                    </Button>
+                </Link>
+            </ProtectedComponent>
+            <ProtectedComponent role={'auditor-members-access'}>
+                <Link href={route('auditor-members.index', { lang })}>
+                    <Button
+                        size={'small'}
+                        className={'whitespace-nowrap'}
+                        startIcon={<GroupsIcon />}
+                        variant={
+                            activeLink() === 'auditor-members'
+                                ? 'contained'
+                                : 'outlined'
+                        }>
+                        {translate('Auditor Members')}
+                    </Button>
+                </Link>
+            </ProtectedComponent>
+            <ProtectedComponent role={'confidentiality-level-access'}>
+                <Link href={route('confidentiality-level.index', { lang })}>
+                    <Button
+                        size={'small'}
+                        className={'whitespace-nowrap'}
+                        startIcon={<LockIcon />}
+                        variant={
+                            activeLink() === 'confidentiality-level'
+                                ? 'contained'
+                                : 'outlined'
+                        }>
+                        {translate('Confidentiality Level')}
+                    </Button>
+                </Link>
+            </ProtectedComponent>
+            <ProtectedComponent role={'application-settings-access'}>
+                <Link href={route('application.settings.index', { lang })}>
+                    <Button
+                        size={'small'}
+                        className={'whitespace-nowrap'}
+                        startIcon={<TuneIcon />}
+                        variant={
+                            activeLink() === 'application-settings'
+                                ? 'contained'
+                                : 'outlined'
+                        }>
+                        {translate('Application Settings')}
+                    </Button>
+                </Link>
+            </ProtectedComponent>
             <ProtectedComponent role={'backups-access'}>
                 <Link href={route('backup.index', { lang })}>
                     <Button
+                        size={'small'}
+                        className={'whitespace-nowrap'}
                         startIcon={
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

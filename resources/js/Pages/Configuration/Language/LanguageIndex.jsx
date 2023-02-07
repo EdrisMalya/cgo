@@ -73,7 +73,7 @@ const LanguageIndex = ({ active, languages, lang }) => {
             </div>
             {languages?.length < 1 ? (
                 <p className={'text-center text-red-500 py-12'}>
-                    No record found
+                    {translate('No record found')}
                 </p>
             ) : (
                 <div className={'mt-3 flex flex-row flex-wrap space-x-2'}>

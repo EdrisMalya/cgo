@@ -35,5 +35,16 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageDictionariesTableSeeder::class);
         $this->call(ActivityLogTableSeeder::class);
         $this->call(LoginLogsTableSeeder::class);
+        $this->call(AuditorTeamsTableSeeder::class);
+        $this->call(AuditorMembersTableSeeder::class);
+        $this->call(TeamMembersTableSeeder::class);
+        $this->call(ConfidentialityLevelsTableSeeder::class);
+        $this->call(NormalAuditsTableSeeder::class);
+        $this->call(AuditFilesTableSeeder::class);
+        $this->call(AuditFormMembersTableSeeder::class);
+        $this->call(AuditFormAuthorizeUsersTableSeeder::class);
+        $this->call(AuditFormFilesAuthorizeDownloaderUsersTableSeeder::class);
+        $this->call(AllowedExtensionsTableSeeder::class);
+        $this->call(AuditFormSeenHistoriesTableSeeder::class);
     }
 }

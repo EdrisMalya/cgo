@@ -40,4 +40,19 @@ class LogActivityController extends Controller
         return back()->with(['message' => translate('Deleted successfully'), 'type'=>'success']);
     }
 
+    public function restore($lang, Request $request, $type)
+    {
+        $this->allowed('log-activity-restore-data');
+        switch ($type){
+            case 'deleted':
+                $data = $request->get('activity')['properties']['old'];
+                try {
+                    $request->get('activity')['subject_type']::create($data);
+                    return back()->with(['message' => translate('Restored successfully'), 'type'=>'success']);
+                }catch (\Exception $exception){
+                    return back()->with(['message' => translate('This record allready resotred'), 'type'=>'error']);
+                }
+        }
+    }
+
 }

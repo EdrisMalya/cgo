@@ -12,6 +12,6 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function allowed($permission, $abort=true){
-        auth()->user()->isAllowed($permission, $abort);
+        return auth()->user()->isAllowed($permission, $abort);
     }
 }

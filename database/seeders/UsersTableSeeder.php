@@ -59,13 +59,13 @@ class UsersTableSeeder extends Seeder
                 'email' => 'haqy@mailinator.com',
             'phone_number' => '+1 (567) 109-1454',
                 'email_verified_at' => NULL,
-                'password' => '$2y$10$G3ZZY7V2d8SyCkzHVTfZ8.sOHGqpIsVilTJ30vHgjtinpCerzPkSG',
+                'password' => '$2y$10$cmKr0vS3MojFE4znS33N9OSdTG22HE5eLCdprvW/o/pH3.oy4vjX2',
                 'status' => 1,
-                'change_password' => 1,
+                'change_password' => 0,
                 'image' => 'users_picture/FckETvUWX13RwA2wEaNE9wt9m5vypmalCBcpV2Hs.jpg',
                 'remember_token' => NULL,
                 'created_at' => '2022-12-21 12:37:02',
-                'updated_at' => '2022-12-21 12:37:02',
+                'updated_at' => '2023-01-31 14:18:42',
             ),
         ));
         
