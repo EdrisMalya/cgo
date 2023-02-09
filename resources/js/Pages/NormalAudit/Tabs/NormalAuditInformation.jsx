@@ -1,15 +1,44 @@
 import React from 'react'
 import AuditDocumentFiles from '@/Components/AuditForms/AuditDocumentFiles'
-import { Fab, TextField } from '@mui/material'
+import { Button, Fab, TextField } from '@mui/material'
 import dayjs from 'dayjs'
 import AuditDocumentMembers from '@/Components/AuditForms/AuditDocumentMembers'
 import parse from 'html-react-parser'
 import { PencilIcon } from '@heroicons/react/24/outline'
 import { TrashIcon } from '@heroicons/react/24/solid'
 import ProtectedComponent from '@/Components/ProtectedComponent'
-import { Link } from '@inertiajs/inertia-react'
+import { Link, useForm } from '@inertiajs/inertia-react'
+import swal from 'sweetalert'
+import { useRecoilState } from 'recoil'
+import { fullPageLoading } from '@/atoms/fullPageLoading'
 
 const NormalAuditInformation = ({ translate, normal_audit, lang }) => {
+    const loading = useRecoilState(fullPageLoading)
+    const { delete: destroy } = useForm()
+    const handleDelete = action => {
+        swal({
+            icon: 'warning',
+            title: translate('Are you sure?'),
+            buttons: true,
+        }).then(res => {
+            if (res) {
+                loading[1](true)
+                destroy(
+                    route('normal-audit.destroy', {
+                        normal_audit: normal_audit.id,
+                        lang,
+                        type: 'delete-normal-audit',
+                        action,
+                    }),
+                    {
+                        onSuccess: () => {
+                            loading[1](false)
+                        },
+                    },
+                )
+            }
+        })
+    }
     return (
         <div>
             <div className={'flex items-center justify-between'}>
@@ -29,10 +58,28 @@ const NormalAuditInformation = ({ translate, normal_audit, lang }) => {
                         </Link>
                     </ProtectedComponent>
                     <ProtectedComponent role={'normal-audit-delete-report'}>
-                        <Fab color={'error'} size={'small'}>
+                        <Fab
+                            onClick={() => handleDelete('move-to-trash')}
+                            color={'error'}
+                            size={'small'}>
                             <TrashIcon className={'h-4'} />
                         </Fab>
                     </ProtectedComponent>
+                    {normal_audit.is_trashed ? (
+                        <ProtectedComponent
+                            role={'normal-audit-remove-from-trash'}>
+                            <Button
+                                onClick={() =>
+                                    handleDelete('remove-from-trash')
+                                }
+                                variant={'outlined'}
+                                color={'success'}>
+                                {translate('Remove from trash')}
+                            </Button>
+                        </ProtectedComponent>
+                    ) : (
+                        <></>
+                    )}
                 </div>
             </div>
             <div className="mt-4 pl-4 border-l dark:border-gray-700">

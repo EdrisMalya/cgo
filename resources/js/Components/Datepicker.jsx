@@ -14,6 +14,7 @@ export default function Datepicker({
     size = 'small',
     returnFormat = null,
     error = '',
+    fullWidth = false,
 }) {
     const [dateValue, setDateValue] = React.useState(value)
 
@@ -34,6 +35,7 @@ export default function Datepicker({
                 }}
                 renderInput={params => (
                     <TextField
+                        fullWidth={fullWidth}
                         helperText={<p className={'text-red-500'}>{error}</p>}
                         size={size}
                         {...params}

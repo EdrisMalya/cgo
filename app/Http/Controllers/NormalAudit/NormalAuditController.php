@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\NormalAudit;
 
 use App\Http\Resources\FileExtensionsResource;
+use App\Http\Resources\ReportedByResource;
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Inertia\Inertia;
@@ -67,12 +69,47 @@ class   NormalAuditController extends Controller
     {
         $this->allowed('normal-audit-access');
         $allowed_users = AuditFormAuthorizeUser::query()->where('user_id', auth()->id())->pluck('audit_form_id')->toArray();
-        $normal_audits = NormalAudit::query()->with('files')->whereIn('id', $allowed_users);
+        $is_trashed = false;
+        if($request->has('show_trashed')){
+            $is_trashed = (boolean)$request->get('show_trashed');
+        }
+        $normal_audits = NormalAudit::query()->with('files')->whereIn('id', $allowed_users)->where('is_trashed', $is_trashed);
+        if($request->has('date_field')){
+            $data = $request->validate([
+                'start_date' => ['required'],
+                'end_date' => ['required'],
+            ]);
+            $normal_audits = $normal_audits->whereBetween($request->get('date_field'), $data);
+        }
+        if($request->has('status')){
+            $statues = collect($request->get('status'))->map(function($status){
+                return $status['label'];
+            })->toArray();
+            $normal_audits = $normal_audits->whereIn('status',$statues);
+        }
+        if($request->has('reported_by')){
+            $user_ids = collect($request->get('reported_by'))->map(fn($user)=>$user['value'])->toArray();
+            $normal_audits = $normal_audits->whereIn('reported_by', $user_ids);
+        }
+        if($request->has('is_trashed')){
+            dd('test');
+        }
         $datatable = new DatatableBuilder($normal_audits, $request);
         $normalAuditsCollection = $datatable->build();
         return Inertia::render('NormalAudit/NormalAuditIndex', [
             'active' => 'home_page',
-            'normal_audits' => NormalAuditResource::collection($normalAuditsCollection)
+            'normal_audits' => NormalAuditResource::collection($normalAuditsCollection),
+            'reported_by' => User::query()
+                ->whereIn('id', NormalAudit::query()->pluck('reported_by')->unique()->toArray())
+                ->get(),
+            'filters' => [
+                'date_field' => $request->get('date_field'),
+                'start_date' => $request->get('start_date'),
+                'end_date' => $request->get('end_date'),
+                'status' => $request->has('status')?$request->get('status'):[],
+                'reported_by' => $request->has('reported_by')?$request->get('reported_by'):[],
+                'show_trashed' => $request->has('show_trashed')?$request->get('show_trashed'):false,
+            ]
         ]);
 
     }
@@ -395,6 +432,30 @@ class   NormalAuditController extends Controller
                         \Log::error($e);
                         abort(404);
                     }
+                case 'delete-normal-audit':
+                    $this->allowed('normal-audit-delete-report');
+                    $message = '';
+                    if(!$normalAudit->is_trashed){
+                        if($request->get('action') == 'move-to-trash'){
+                            $normalAudit->update([
+                                'is_trashed' => true
+                            ]);
+                            $message = 'Report moved to trash';
+                        }
+                    }else{
+                        if($request->get('action') == 'remove-from-trash'){
+                            $normalAudit->update([
+                                'is_trashed' => false
+                            ]);
+                            $message = 'Report moved to trash';
+                        }else{
+                            return back()
+                                ->with(['message' => 'Delete is not possible', 'type' => 'success']);
+                        }
+                    }
+                return redirect()
+                    ->to(route('normal-audit.index', ['normal_audit' => encrypt($normalAudit->id), 'lang' => $lang]))
+                    ->with(['message' => translate($message), 'type' => 'success']);
             }
         }catch (Exception $exception){
             abort(404);

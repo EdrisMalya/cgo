@@ -2,16 +2,24 @@ import React from 'react'
 import Authenticated from '@/Layouts/AuthenticatedLayout'
 import useLanguage from '@/hooks/useLanguage'
 import { Button } from '@mui/material'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { FunnelIcon, PlusIcon } from '@heroicons/react/24/outline'
 import ProtectedComponent from '@/Components/ProtectedComponent'
 import { Link } from '@inertiajs/inertia-react'
 import NormalAuditLinks from '@/Pages/NormalAudit/NormalAuditLinks'
 import Datatable from '@/Components/Datatable/Datatable'
 import VisibilityIcon from '@mui/icons-material/Visibility'
 import { Inertia } from '@inertiajs/inertia'
+import NormalAuditFilters from '@/Pages/NormalAudit/NormalAuditFilters'
 
-const NormalAuditIndex = ({ lang, active, normal_audits }) => {
+const NormalAuditIndex = ({
+    lang,
+    active,
+    normal_audits,
+    reported_by,
+    filters,
+}) => {
     const { translate } = useLanguage()
+    const [showFilter, setShowFilter] = React.useState(false)
     return (
         <Authenticated
             title={translate('Normal audit home page')}
@@ -40,6 +48,18 @@ const NormalAuditIndex = ({ lang, active, normal_audits }) => {
                     fromResource={true}
                     showNumber={true}
                     data={normal_audits}
+                    datatableFilters={[
+                        {
+                            element: (
+                                <Button
+                                    onClick={() => setShowFilter(true)}
+                                    endIcon={<FunnelIcon className={'h-4'} />}
+                                    variant={'outlined'}>
+                                    {translate('Filters')}
+                                </Button>
+                            ),
+                        },
+                    ]}
                     otherOptions={[
                         {
                             icon: <VisibilityIcon fontSize={'8'} />,
@@ -113,6 +133,16 @@ const NormalAuditIndex = ({ lang, active, normal_audits }) => {
                     ]}
                 />
             </div>
+            {showFilter && (
+                <NormalAuditFilters
+                    filters={filters}
+                    reported_by={reported_by}
+                    translate={translate}
+                    onClose={() => {
+                        setShowFilter(false)
+                    }}
+                />
+            )}
         </Authenticated>
     )
 }

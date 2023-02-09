@@ -36,6 +36,7 @@ return new class extends Migration
             $table->unsignedBigInteger('approved_by')->default(0);
             $table->date('approved_by_date')->nullable();
             $table->string('status')->default('new');
+            $table->boolean('is_trashed')->default(false);
             $table->timestamps();
         });
     }

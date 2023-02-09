@@ -61,7 +61,8 @@ class NormalAuditDetailsResource extends JsonResource
                     ->where('audit_form_id', $this->id)
                     ->pluck('user_id'))
                     ->get()
-            )
+            ),
+            'is_trashed' => $this->is_trashed
         ];
     }
 }
