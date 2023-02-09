@@ -550,6 +550,15 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2023-02-05 12:38:25',
                 'updated_at' => '2023-02-05 12:38:25',
             ),
+            59 => 
+            array (
+                'id' => 75,
+                'permission_group_id' => 14,
+                'name' => 'Remove from trash',
+                'key' => 'normal-audit-remove-from-trash',
+                'created_at' => '2023-02-08 15:17:09',
+                'updated_at' => '2023-02-08 15:17:09',
+            ),
         ));
         
         

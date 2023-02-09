@@ -729,6 +729,76 @@ class LoginLogsTableSeeder extends Seeder
                 'created_at' => '2023-02-07 09:22:20',
                 'updated_at' => '2023-02-07 09:22:20',
             ),
+            71 => 
+            array (
+                'id' => 72,
+                'email' => 'adrismalya@gmail.com',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 0,
+                'created_at' => '2023-02-08 09:56:50',
+                'updated_at' => '2023-02-08 09:56:50',
+            ),
+            72 => 
+            array (
+                'id' => 73,
+                'email' => 'adrismalya@gmail.com',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 1,
+                'created_at' => '2023-02-08 09:56:53',
+                'updated_at' => '2023-02-08 09:56:53',
+            ),
+            73 => 
+            array (
+                'id' => 74,
+                'email' => 'adrismalya@gmail.com',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 1,
+                'created_at' => '2023-02-08 14:22:13',
+                'updated_at' => '2023-02-08 14:22:13',
+            ),
+            74 => 
+            array (
+                'id' => 75,
+                'email' => 'edris.malya@dab.gov.af',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 1,
+                'created_at' => '2023-02-08 14:51:44',
+                'updated_at' => '2023-02-08 14:51:44',
+            ),
+            75 => 
+            array (
+                'id' => 76,
+                'email' => 'adrismalya@gmail.com',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 0,
+                'created_at' => '2023-02-09 09:44:17',
+                'updated_at' => '2023-02-09 09:44:17',
+            ),
+            76 => 
+            array (
+                'id' => 77,
+                'email' => 'adrismalya@gmail.com',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 0,
+                'created_at' => '2023-02-09 09:44:21',
+                'updated_at' => '2023-02-09 09:44:21',
+            ),
+            77 => 
+            array (
+                'id' => 78,
+                'email' => 'adrismalya@gmail.com',
+                'ip_address' => '127.0.0.1',
+                'action_type' => 'login',
+                'status' => 1,
+                'created_at' => '2023-02-09 09:44:24',
+                'updated_at' => '2023-02-09 09:44:24',
+            ),
         ));
         
         
